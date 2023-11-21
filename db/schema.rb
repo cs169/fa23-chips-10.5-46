@@ -43,8 +43,16 @@ ActiveRecord::Schema.define(version: 2023_11_21_043713) do
     t.index ["representative_id"], name: "index_news_items_on_representative_id"
   end
 
-# Could not dump table "representatives" because of following StandardError
-#   Unknown type 'array' for column 'address'
+  create_table "representatives", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "ocdid"
+    t.string "title"
+    t.string "address"
+    t.string "photo"
+    t.string "party"
+  end
 
   create_table "states", force: :cascade do |t|
     t.string "name", null: false
