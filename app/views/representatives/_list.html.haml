@@ -1,0 +1,13 @@
+%table.table.table-striped.table-hover#events
+    %caption Table of Representatives
+    %thead.thead-dark
+        %tr
+            %th Name
+            %th Office
+            %th Links
+    %tbody
+        - representatives.each do |rep|
+            %tr
+                %td= link_to rep.name, show_representatives_path(rep)
+                %td= rep.title
+                %td= link_to 'News Articles', representative_news_items_path(rep.id), class: 'btn btn-primary'
