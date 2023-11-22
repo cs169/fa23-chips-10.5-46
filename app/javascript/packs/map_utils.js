@@ -11,8 +11,17 @@ exports.handleMapMouseEvents = (jQueryTargets, hoverHtmlProvider, clickCallback)
         infoBox.css('top', elem.pageY - infoBox.height() - 30);
         infoBox.css('left', elem.pageX - infoBox.width() / 2);
     }).mouseover();
+
     jQueryTargets.click((e) => {
-        clickCallback($(e.currentTarget));
+        const target = $(e.currentTarget);
+        clickCallback(target);
+        const countyName = target.data('county-name');
+        fetch(`/representatives/by_county?county=${encodeURIComponent(countyName)}`)
+            .then((response) => response.text())
+            .then((html) => {
+                $('#representatives-list').html(html);
+            })
+            .catch((error) => console.error('Error:', error));
     });
 };
 
