@@ -14,6 +14,7 @@ jobs:
           - ubuntu-22.04
     env:
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+    run: touch master.key && echo "$RAILS_MASTER_KEY" > master.key
     steps:
       - name: Cache multiple paths
         uses: actions/cache@v2
