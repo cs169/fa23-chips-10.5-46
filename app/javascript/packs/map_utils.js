@@ -17,11 +17,11 @@ exports.handleMapMouseEvents = (jQueryTargets, hoverHtmlProvider, clickCallback)
         clickCallback(target);
         const countyName = target.data('county-name');
         fetch(`/representatives/by_county?county=${encodeURIComponent(countyName)}`)
-            .then(response => (response.text()))
-            .then(html => ({
+            .then((response) => response.text())
+            .then((html) => {
                 $('#representatives-list').html(html);
             })
-            .catch(error => (console.error('Error:', error))));
+            .catch((error) => console.error('Error:', error));
     });
 };
 
