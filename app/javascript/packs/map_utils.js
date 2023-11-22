@@ -19,7 +19,7 @@ exports.handleMapMouseEvents = (jQueryTargets, hoverHtmlProvider, clickCallback)
         fetch(`/representatives/by_county?county=${encodeURIComponent(countyName)}`)
             .then(response => (response.text()))
             .then(html => ({
-                $('#representatives-list').html(html);
+                $document.querySelector('#representatives-list').html(html);
             })
             .catch(error => (console.error('Error:', error))));
     });
