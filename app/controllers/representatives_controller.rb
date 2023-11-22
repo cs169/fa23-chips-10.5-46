@@ -4,7 +4,7 @@ class RepresentativesController < ApplicationController
   def index
     @representatives = Representative.all
   end
-  
+
   def by_county
     county = params[:county]
     @representatives = Representative.where(county: county)
