@@ -12,23 +12,18 @@ exports.handleMapMouseEvents = (jQueryTargets, hoverHtmlProvider, clickCallback)
         infoBox.css('left', elem.pageX - infoBox.width() / 2);
     }).mouseover();
 
-    //jQueryTargets.click((e) => {
-        //clickCallback($(e.currentTarget));
-    //});
-
     jQueryTargets.click((e) => {
-    const target = $(e.currentTarget);
-    clickCallback(target); 
-        
-    const countyName = target.data('county-name'); 
-    fetch(`/representatives/by_county?county=${encodeURIComponent(countyName)}`)
-        .then(response => response.text())
-        .then(html => {
-            $('#representatives-list').html(html);
-        })
-        .catch(error => console.error('Error:', error));
-    });
-};
+        const target = $(e.currentTarget);
+        clickCallback(target); 
+        const countyName = target.data('county-name'); 
+        fetch(`/representatives/by_county?county=${encodeURIComponent(countyName)}`)
+            .then(response => response.text())
+            .then(html => {
+                $('#representatives-list').html(html);
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    };
 
 exports.zeroPad = (number, numZeros) => {
     let s = String(number);
