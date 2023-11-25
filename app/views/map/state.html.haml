@@ -34,7 +34,7 @@
                                             %td= county.name
                                             %td= county.std_fips_code
                                             %td
-                                                = link_to 'View', county_path(state_symbol: @state.symbol,
+                                                = link_to 'View', search_representatives_path(county.name,
                                                 std_fips_code: county.std_fips_code),
                                                 class: 'btn btn-primary'
 #actionmap-info-box

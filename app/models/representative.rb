@@ -23,7 +23,13 @@ class Representative < ApplicationRecord
         existing_rep.update({ ocdid: ocdid_temp, title: title_temp })
         reps.push(existing_rep)
       else
-        rep = Representative.create!({ name: official.name, ocdid: ocdid_temp, title: title_temp })
+        official_address = official.address
+        if official_address.nil?
+          concatenated_address = ''
+        else
+          concatenated_address = "#{official_address[0].line1}, #{official_address[0].city}, #{official_address[0].state} #{official_address[0].zip}"
+        end
+        rep = Representative.create!({ name: official.name, ocdid: ocdid_temp, title: title_temp, address: concatenated_address, party: official.party, photo: official.photo_url })
         reps.push(rep)
       end
     end
