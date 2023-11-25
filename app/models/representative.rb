@@ -20,7 +20,7 @@ class Representative < ApplicationRecord
       existing_rep = Representative.find_by(name: official.name)
 
       if existing_rep
-        existing_rep.update({ ocdid: ocdid_temp, title: title_temp })
+        #existing_rep.update({ ocdid: ocdid_temp, title: title_temp })
         reps.push(existing_rep)
       else
         official_address = official.address
