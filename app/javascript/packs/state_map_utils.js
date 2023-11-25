@@ -62,15 +62,15 @@ exports.setupEventHandlers = (stateMap) => {
         const countyName = elem.attr('data-county-name');
         return `${countyName}, ${stateMap.state.symbol}`;
     };
-    //const clickCallback = (elem) => {
-        //const countyFipsCode = elem.attr('data-county-fips-code');
-        //window.location.href = `/state/${stateMap.state.symbol}/county/${countyFipsCode}`;
-    //};
+    // const clickCallback = (elem) => {
+        // const countyFipsCode = elem.attr('data-county-fips-code');
+        // window.location.href = `/state/${stateMap.state.symbol}/county/${countyFipsCode}`;
+    // };
 
     const clickCallback = (elem) => {
         const countyFipsCode = elem.attr('data-county-fips-code');
-        const countyName = elem.attr('data-county-name'); 
-        const encodedCountyName = encodeURIComponent(countyName); 
+        const countyName = elem.attr('data-county-name');
+        const encodedCountyName = encodeURIComponent(countyName);
         window.location.href = `/search/${encodedCountyName}?std_fips_code=${countyFipsCode}`;
     };
 
