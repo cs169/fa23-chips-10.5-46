@@ -59,6 +59,7 @@ class MyNewsItemsController < SessionController
     'Climate Change', 'Homelessness', 'Racism', 'Tax Reform', 'Net
     Neutrality', 'Religious Freedom', 'Border Security', 'Minimum Wage',
     'Equal Pay']
+  end
 
   # Only allow a list of trusted parameters through.
   def news_item_params
