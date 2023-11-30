@@ -9,18 +9,11 @@ class Representative < ApplicationRecord
     end
   end
 
-  private
-
   def self.process_representative(official, index, rep_info)
     title_temp, ocdid_temp = find_office_info_for_rep(rep_info, index)
     existing_rep = Representative.find_by(name: official.name)
 
-    if existing_rep
-      # existing_rep.update({ ocdid: ocdid_temp, title: title_temp })
-      existing_rep
-    else
-      create_new_representative(official, ocdid_temp, title_temp)
-    end
+    existing_rep || create_new_representative(official, ocdid_temp, title_temp)
   end
 
   def self.find_office_info_for_rep(rep_info, index)
@@ -42,16 +35,18 @@ class Representative < ApplicationRecord
     concatenated_address = if official_address.nil?
                              ''
                            else
-                             "#{official_address[0].line1}, #{official_address[0].city}, #{official_address[0].state} #{official_address[0].zip}"
+                             "#{official_address[0].line1},
+                             #{official_address[0].city},
+                             #{official_address[0].state},
+                             #{official_address[0].zip}"
                            end
     Representative.create!({
-      name: official.name,
-      ocdid: ocdid_temp,
-      title: title_temp,
-      address: concatenated_address,
-      party: official.party,
-      photo: official.photo_url
-    })
+                             name:    official.name,
+                             ocdid:   ocdid_temp,
+                             title:   title_temp,
+                             address: concatenated_address,
+                             party:   official.party,
+                             photo:   official.photo_url
+                           })
   end
 end
-
