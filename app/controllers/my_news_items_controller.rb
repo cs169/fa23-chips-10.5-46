@@ -52,8 +52,9 @@ class MyNewsItemsController < SessionController
   def set_news_item
     @news_item = NewsItem.find(params[:id])
   end
-  
+
   def set_issues_list
+<<<<<<< HEAD
     @issues_list = [
       'Free Speech', 'Immigration', 'Terrorism', 'Social Security and
       Medicare', 'Abortion', 'Student Loans', 'Gun Control', 'Unemployment',
@@ -61,6 +62,13 @@ class MyNewsItemsController < SessionController
       Neutrality', 'Religious Freedom', 'Border Security', 'Minimum Wage',
       'Equal Pay'
     ]
+=======
+    @issues_list = ['Free Speech', 'Immigration', 'Terrorism', 'Social Security and
+    Medicare', 'Abortion', 'Student Loans', 'Gun Control', 'Unemployment',
+                    'Climate Change', 'Homelessness', 'Racism', 'Tax Reform', 'Net
+    Neutrality', 'Religious Freedom', 'Border Security', 'Minimum Wage',
+                    'Equal Pay']
+>>>>>>> fd660b830dc533f9376a5e3c9f8a5a069d5b01d6
   end
 
   # Only allow a list of trusted parameters through.

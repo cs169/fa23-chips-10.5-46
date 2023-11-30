@@ -4,36 +4,49 @@ class Representative < ApplicationRecord
   has_many :news_items, dependent: :delete_all
 
   def self.civic_api_to_representative_params(rep_info)
-    reps = []
+    rep_info.officials.each_with_index.map do |official, index|
+      process_representative(official, index, rep_info)
+    end
+  end
 
-    rep_info.officials.each_with_index do |official, index|
-      ocdid_temp = ''
-      title_temp = ''
+  def self.process_representative(official, index, rep_info)
+    title_temp, ocdid_temp = find_office_info_for_rep(rep_info, index)
+    existing_rep = Representative.find_by(name: official.name)
 
-      rep_info.offices.each do |office|
-        if office.official_indices.include? index
-          title_temp = office.name
-          ocdid_temp = office.division_id
-        end
-      end
+    existing_rep || create_new_representative(official, ocdid_temp, title_temp)
+  end
 
-      existing_rep = Representative.find_by(name: official.name)
+  def self.find_office_info_for_rep(rep_info, index)
+    ocdid_temp = ''
+    title_temp = ''
 
-      if existing_rep
-        reps.push(existing_rep)
-      else
-        official_address = official.address
-        if official_address.nil?
-          concatenated_address = ''
-        else
-          concatenated_address = "#{official_address[0].line1}, #{official_address[0].city}, #{official_address[0].state} #{official_address[0].zip}"
-        end
-        rep = Representative.create!({ name: official.name, ocdid: ocdid_temp, title: title_temp,
-              address: concatenated_address, party: official.party, photo: official.photo_url })
-        reps.push(rep)
+    rep_info.offices.each do |office|
+      if office.official_indices.include? index
+        title_temp = office.name
+        ocdid_temp = office.division_id
       end
     end
 
-    reps
+    [title_temp, ocdid_temp]
+  end
+
+  def self.create_new_representative(official, ocdid_temp, title_temp)
+    official_address = official.address
+    concatenated_address = if official_address.nil?
+                             ''
+                           else
+                             "#{official_address[0].line1},
+                             #{official_address[0].city},
+                             #{official_address[0].state},
+                             #{official_address[0].zip}"
+                           end
+    Representative.create!({
+                             name:    official.name,
+                             ocdid:   ocdid_temp,
+                             title:   title_temp,
+                             address: concatenated_address,
+                             party:   official.party,
+                             photo:   official.photo_url
+                           })
   end
 end
