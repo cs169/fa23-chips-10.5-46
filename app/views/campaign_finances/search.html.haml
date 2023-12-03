@@ -1,40 +1,40 @@
 .container-fluid
-  .row
-    .col-md-12
-      .table-responsive-md.pt-5
-        %table.table.table-striped.table-hover#campaign_finances_results.mx-auto
-          %caption Top 20 Candidates in Category for Election Cycle
-          %thead.thead-dark
-            %tr
-              %th Candidate
-              %th Party
-              %th Contributions from Individuals
-              %th Contributions from PACs
-              %th Total Contributions
-              %th Total Disbursements
-              %th Begin Cash
-              %th End Cash
-              %th Total Refunds
-              %th Candidate Loans
-              %th Debts Owed
-          %tbody
-            - if defined?(@results) && @results.present?
-              - @results.each do |candidate|
-                %tr
-                  %td= candidate['name']
-                  %td= candidate['party']
-                  %td= number_to_currency(candidate['total_from_individuals'], precision: 2)
-                  %td= number_to_currency(candidate['total_from_pacs'], precision: 2)
-                  %td= number_to_currency(candidate['total_contributions'], precision: 2)
-                  %td= number_to_currency(candidate['total_disbursements'], precision: 2)
-                  %td= number_to_currency(candidate['begin_cash'], precision: 2)
-                  %td= number_to_currency(candidate['end_cash'], precision: 2)
-                  %td= number_to_currency(candidate['total_refunds'], precision: 2)
-                  %td= number_to_currency(candidate['candidate_loans'], precision: 2)
-                  %td= number_to_currency(candidate['debts_owed'], precision: 2)
-            - elsif defined?(@error_message)
-              %tr
-                %td{ colspan: 11 }= @error_message
-            - else
-              %tr
-                %td{ colspan: 11 } No results to display.
+    .row
+        .col-md-12
+            .table-responsive-md.pt-5
+                %table.table.table-striped.table-hover.mx-auto
+                    %caption Top 20 Candidates in Category for Election Cycle
+                    %thead.thead-dark
+                        %tr
+                            %th Candidate
+                            %th Party
+                            %th Contributions from Individuals
+                            %th Contributions from PACs
+                            %th Total Contributions
+                            %th Total Disbursements
+                            %th Begin Cash
+                            %th End Cash
+                            %th Total Refunds
+                            %th Candidate Loans
+                            %th Debts Owed
+                    %tbody
+                        - if defined?(@results) && @results.present?
+                            - @results.each do |candidate|
+                                %tr
+                                    %td= candidate['name']
+                                    %td= candidate['party']
+                                    %td= number_to_currency(candidate['total_from_individuals'], precision: 2)
+                                    %td= number_to_currency(candidate['total_from_pacs'], precision: 2)
+                                    %td= number_to_currency(candidate['total_contributions'], precision: 2)
+                                    %td= number_to_currency(candidate['total_disbursements'], precision: 2)
+                                    %td= number_to_currency(candidate['begin_cash'], precision: 2)
+                                    %td= number_to_currency(candidate['end_cash'], precision: 2)
+                                    %td= number_to_currency(candidate['total_refunds'], precision: 2)
+                                    %td= number_to_currency(candidate['candidate_loans'], precision: 2)
+                                    %td= number_to_currency(candidate['debts_owed'], precision: 2)
+                        - elsif defined?(@error_message)
+                            %tr
+                                %td{ colspan: 11 }= @error_message
+                        - else
+                            %tr
+                                %td{ colspan: 11 } No results to display.

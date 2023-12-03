@@ -9,7 +9,7 @@
                     %label.col-form-label
                         Select a cycle:
                 .col-md-6
-                    = select_tag(:cycle, options_for_select((2010..2020).step(2).to_a.reverse), 
+                    = select_tag(:cycle, options_for_select((2010..2020).step(2).to_a.reverse),
                         class: 'form-control', include_blank: 'Select a cycle')
 
             .form-group.row
