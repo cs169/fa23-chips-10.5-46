@@ -1,0 +1,32 @@
+.row.mt-2
+    .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
+        %h1.text-center Search for Campaign Finances
+
+    .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
+        = form_tag campaign_finances_search_path, method: :get do
+            .form-group.row
+                .col-md-4
+                    %label.col-form-label
+                        Select a cycle:
+                .col-md-6
+                    = select_tag(:cycle, options_for_select((2010..2020).step(2).to_a.reverse), 
+                        class: 'form-control', include_blank: 'Select a cycle')
+
+            .form-group.row
+                .col-md-4
+                    %label.col-form-label
+                        Select a category:
+                .col-md-6
+                    = select_tag(:category, options_for_select([['Candidate Loan', 'candidate-loan'],
+                                                                ['Contribution Total', 'contribution-total'],
+                                                                ['Debts Owed', 'debts-owed'],
+                                                                ['Disbursements Total', 'disbursements-total'],
+                                                                ['End Cash', 'end-cash'],
+                                                                ['Individual Total', 'individual-total'],
+                                                                ['PAC Total', 'pac-total'],
+                                                                ['Receipts Total', 'receipts-total'],
+                                                                ['Refund Total', 'refund-total']]),
+                                class: 'form-control', include_blank: 'Select a category')
+
+            .actions
+                = submit_tag 'Search', class: 'btn btn-primary'

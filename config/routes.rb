@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
     get '/ajax/state/:state_symbol' => 'ajax#counties'
 
+    get '/campaign_finances' => 'campaign_finances#index', as: :campaign_finances
+    get '/campaign_finances/search' => 'campaign_finances#search', as: :campaign_finances_search
 
     # Routes for Events
     resources :events, only: %i[index show]
