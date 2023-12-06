@@ -10,10 +10,10 @@ RSpec.describe Representative, type: :request do
         address: '123 Main St', party: 'Party A',
         photo: 'https://example.com/image.jpg'
       )
-      allow(Representative).to receive(:find).and_return(rep_info)
-      get representative_path(1)
+      allow(described_class).to receive(:find).and_return(rep_info)
+      get '/representatives/1'
     end
-    
+
     it 'responds with HTTP status ok' do
       expect(response).to have_http_status(:ok)
     end
