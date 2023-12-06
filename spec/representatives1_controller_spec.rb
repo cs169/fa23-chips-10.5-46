@@ -11,7 +11,7 @@ RSpec.describe Representative, type: :request do
         photo: 'https://example.com/image.jpg'
       )
       allow(described_class).to receive(:find).and_return(rep_info)
-      get representative_path(1)
+      get '/representatives/1'
     end
 
     it 'responds with HTTP status ok' do
